@@ -26,7 +26,18 @@ def add_patient():
 def schedule_appointment():
     data = request.get_json()
     appointments.append(data)
-    return jsonify({"message": "Appointmnt scheduled successfully"})
+    return jsonify({"message": "Appointment scheduled successfully"})
+
+
+# Add a new route to retrieve a list of patients for a doctor
+@app.route('/get_patients_for_doctor', methods=['GET'])
+def get_patients_for_doctor():
+    doctor_name = request.args.get('doctor_name')
+
+    # Find patients associated with the specified doctor
+    doctor_patients = [patient for patient in patients if patient.get('doctor') == doctor_name]
+
+    return jsonify({"patients": doctor_patients})
 
 if __name__ == '__main__':
     app.run(debug=True)
