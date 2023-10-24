@@ -1,6 +1,11 @@
 from flask import Flask, request, jsonify, render_template
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABSE_URI'] = 'sqlite:///site.db' #using sqlite for db
+db = SQLAlchemy(app)
+
 
 doctors = []
 patients = []
