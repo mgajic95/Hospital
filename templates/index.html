@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+</head>
+<body>
+    <h1>Hospital Management System</h1>
+
+    <form id="doctorForm">
+        <label for="doctorName">Doctor Name:</label>
+        <input type="text" id="doctorName" name="doctorName">
+        <button type="button" onclick="addDoctor()">Add Doctor</button>
+    </form>
+
+    <form id="patientForm">
+        <label for="patientName">Patient Name:</label>
+        <input type="text" id="patientName" name="patientName">
+        <button type="button" onclick="addPatient()">Add Patient</button>
+    </form>
+
+    <form id="appointmentForm">
+        <label for="doctor">Doctor:</label>
+        <input type="text" id="doctor" name="doctor">
+        <label for="patient">Patient:</label>
+        <input type="text" id="patient" name="patient">
+        <button type="button" onclick="scheduleAppointment()">Schedule Appointment</button>
+    </form>
+
+    <script>
+        function addDoctor() {
+            // Implement logic to send a POST request to /add_doctor endpoint
+        }
+
+        function addPatient() {
+            // Implement logic to send a POST request to /add_patient endpoint
+        }
+
+        function scheduleAppointment() {
+            // Implement logic to send a POST request to /schedule_appointment endpoint
+        }
+    </script>
+</body>
+</html>

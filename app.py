@@ -1,10 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 doctors = []
 patients = []
 appointments = []
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/add_doctor', methods=['POST'])
 def add_doctor():
