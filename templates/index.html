@@ -4,32 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Hospital Management System</title>
 </head>
-<body>
-    <h1>Hospital Management System</h1>
+<body class="container mt-5">
 
-    <form id="doctorForm" onsubmit="return addDoctor()">
-        <label for="doctorName">Doctor Name:</label>
-        <input type="text" id="doctorName" name="doctorName">
-        <button type="submit">Add Doctor</button>
+    <h1 class="mb-4">Hospital Management System</h1>
+
+    <form id="doctorForm" onsubmit="return addDoctor()" class="mb-3">
+        <div class="mb-3">
+            <label for="doctorName" class="form-label">Doctor Name:</label>
+            <input type="text" id="doctorName" name="doctorName" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Doctor</button>
+        <!-- Display feedback message for addDoctor -->
+        <div id="doctorFeedback" class="mt-2"></div>
     </form>
 
-    <form id="patientForm" onsubmit="return addPatient()">
-        <label for="patientName">Patient Name:</label>
-        <input type="text" id="patientName" name="patientName">
-        <button type="submit">Add Patient</button>
+    <form id="patientForm" onsubmit="return addPatient()" class="mb-3">
+        <div class="mb-3">
+            <label for="patientName" class="form-label">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Patient</button>
+        <!-- Display feedback message for addPatient -->
+        <div id="patientFeedback" class="mt-2"></div>
     </form>
 
     <form id="appointmentForm" onsubmit="return scheduleAppointment()">
-        <label for="doctor">Doctor:</label>
-        <input type="text" id="doctor" name="doctor">
-        <label for="patient">Patient:</label>
-        <input type="text" id="patient" name="patient">
-        <button type="submit">Schedule Appointment</button>
+        <div class="mb-3">
+            <label for="doctor" class="form-label">Doctor:</label>
+            <input type="text" id="doctor" name="doctor" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="patient" class="form-label">Patient:</label>
+            <input type="text" id="patient" name="patient" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+        <!-- Display feedback message for scheduleAppointment -->
+        <div id="appointmentFeedback" class="mt-2"></div>
     </form>
 
+    <!-- Include Bootstrap JS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Import the external script.js file -->
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+
 </body>
 </html>
