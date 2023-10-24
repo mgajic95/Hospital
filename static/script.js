@@ -1,100 +1,82 @@
-function addDoctor() {
-    var doctorName = document.getElementById("doctorName").value;
+document.addEventListener('DOMContentLoaded', function () {
+  const addDoctorForm = document.getElementById('doctorForm');
+  const addPatientForm = document.getElementById('patientForm');
+  const scheduleAppointmentForm = document.getElementById('appointmentForm');
 
-    fetch('/add_doctor', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: doctorName }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data && data.message) {
+    function addDoctor() {
+        const name = document.getElementById('doctorName').value;
+
+        fetch('/add_doctor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
             // Display feedback message for addDoctor
-            document.getElementById("doctorFeedback").innerHTML = '<div class="alert alert-info">' + data.message + '</div>';
-        } else {
-            throw new Error('Invalid response format');
-        }
-    })
-    .catch(error => {
-        console.error('Add Doctor Error:', error);
-        document.getElementById("doctorFeedback").innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-    });
+            document.getElementById('doctorFeedback').innerHTML = data.message;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 
-    return false;
-}
+    function addPatient() {
+        const name = document.getElementById('patientName').value;
+        const doctor = document.getElementById('patientDoctor').value;
 
-function addPatient() {
-    var patientName = document.getElementById("patientName").value;
-
-    fetch('/add_patient', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: patientName }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data && data.message) {
+        fetch('/add_patient', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, doctor }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
             // Display feedback message for addPatient
-            document.getElementById("patientFeedback").innerHTML = '<div class="alert alert-info">' + data.message + '</div>';
-        } else {
-            throw new Error('Invalid response format');
-        }
-    })
-    .catch(error => {
-        console.error('Add Patient Error:', error);
-        document.getElementById("patientFeedback").innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
-    });
+            document.getElementById('patientFeedback').innerHTML = data.message;
+        })
+        .catch(error => console.error('Error:', error));
+    }
 
-    return false;
-}
-
-function scheduleAppointment() {
-    var doctor = document.getElementById("doctor").value;
-    var patient = document.getElementById("patient").value;
+    function scheduleAppointment() {
+    const doctor = document.getElementById('appointmentDoctor').value;
+    const patient = document.getElementById('appointmentPatient').value;
+    const date = document.getElementById('appointmentDate').value;
 
     fetch('/schedule_appointment', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ doctor: doctor, patient: patient }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ doctor, patient, date }),
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data && data.message) {
-            // Display feedback message for scheduleAppointment
-            document.getElementById("appointmentFeedback").innerHTML = '<div class="alert alert-info">' + data.message + '</div>';
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Display feedback message for scheduleAppointment
+        document.getElementById('appointmentFeedback').innerHTML = data.message;
+      })
+      .catch(error => console.error('Error:', error));
+  }
 
-            // Redirect to a blank form
-            document.getElementById("doctor").value = "";
-            document.getElementById("patient").value = "";
-        } else {
-            throw new Error('Invalid response format');
-        }
-    })
-    .catch(error => {
-        console.error('Schedule Appointment Error:', error);
-        document.getElementById("appointmentFeedback").innerHTML = '<div class="alert alert-danger">An error occurred. Please try again.</div>';
+    // Add event listeners to forms
+    addDoctorForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    addDoctor();
+  });
+
+  addPatientForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    addPatient();
+  });
+
+  scheduleAppointmentForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    scheduleAppointment();
+
     });
-
-    return false;
-}
+});
